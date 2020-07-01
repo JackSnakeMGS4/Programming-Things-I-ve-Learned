@@ -50,7 +50,6 @@ class DoublyLinkedList{
 	}
 
 	shift(){
-		// remove node from beginning of list
 		if(!this.head) return undefined;
 
 		let oldHead = this.head;
@@ -70,7 +69,6 @@ class DoublyLinkedList{
 	}
 
 	unshift(value){
-		// add node to beginning of list
 		let node = new Node(value);
 
 		if(!this.head){
@@ -88,33 +86,65 @@ class DoublyLinkedList{
 		return this;
 	}
 
-	get(index){
-		// depending on the index either search from the
-		// list's head or tail
-		// I.E. list length = 10 so index 3 (fourth item) is closer to head
-		// so start search from head
-
+	getNode(index){
 		if(index < 0 || index >= this.length) return null;
-		switch(index){
-			case index < 0:
-			case index >= this.length:
-				return null;
-				break;
-			case index <= (this.length/2-1):
-				return this._searchHelper(true);
-				break;
-			case index > (this.length/2-1):
-				return this._searchHelper(false);
-				break;
+		else if(index <= (this.length/2)){
+			return this._searchHelper(true, index);
+		}
+		else{
+			// index > (this.length/2)
+			return this._searchHelper(false, index);
 		}
 	}
 
-	set(index, value){
+	setNode(index, value){
+		let nodeToChange = this.getNode(index);
+		nodeToChange ? nodeToChange.value = value : null;
 
+		return !!nodeToChange;
 	}
 
 	// Helper function for looping through lists depending on whether index is > or <= list.length - 1;
-	_searchHelper(shouldLoopFromHead){
-		
+	_searchHelper(shouldLoopFromHead, index){
+		let currentIndex;
+		let currentNode;
+		shouldLoopFromHead ?  currentIndex = 0 : currentIndex = this.length - 1;
+		shouldLoopFromHead ? currentNode = this.head : currentNode = this.tail;
+
+		do{
+			if(currentIndex === index){
+				break;
+			}
+			else{
+				shouldLoopFromHead ? currentNode = currentNode.next : currentNode = currentNode.prev;
+
+				shouldLoopFromHead ? currentIndex++ : currentIndex--;
+			}
+		}
+		while(currentIndex !== index)
+
+		return currentNode;
+	}
+
+	insertNode(index, value){
+		if(index < 0 || index >= this.length) return false;
+		else if(index === 0) return !!this.unshift(value);
+		else if(index === this.length - 1) return !!this.push(value);
+		else{
+			let node = new Node(value);
+			let oldNode = this.getNode(index);	
+
+			node.prev = oldNode.prev;
+			oldNode.prev.next = node;
+			node.next = oldNode;
+			oldNode.prev = node;
+
+			this.length++;
+			return true;
+		}
+	}
+
+	removeNode(index){
+
 	}
 }
