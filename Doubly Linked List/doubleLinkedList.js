@@ -87,6 +87,7 @@ class DoublyLinkedList{
 	}
 
 	getNode(index){
+		// Use divide and conquer approach to cut down on searching costs
 		if(index < 0 || index >= this.length) return null;
 		else if(index <= (this.length/2)){
 			return this._searchHelper(true, index);
@@ -145,6 +146,19 @@ class DoublyLinkedList{
 	}
 
 	removeNode(index){
+		if(index < 0 || index >= this.length) return undefined;
+		else if(index === 0) return this.shift();
+		else if(index === this.length - 1) return this.pop();
+		else{
+			let nodeToRemove = this.getNode(index);
+			nodeToRemove.prev.next = nodeToRemove.next;
+			nodeToRemove.next.prev = nodeToRemove.prev;
 
+			nodeToRemove.prev = null;
+			nodeToRemove.next = null;
+
+			this.length--;
+			return nodeToRemove;
+		}
 	}
 }
