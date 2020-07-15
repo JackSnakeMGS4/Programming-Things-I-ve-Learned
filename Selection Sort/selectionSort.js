@@ -1,4 +1,4 @@
-function bubbleSort(arr){
+function selectionSort(arr){
 	let i = arr.length;
 	let j = 0;
 	let noSwaps;
