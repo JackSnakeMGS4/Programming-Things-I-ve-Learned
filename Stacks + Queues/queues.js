@@ -1,0 +1,3 @@
+/* 
+    Refer to stacks.js for info on queues FIFO principle.
+*/
