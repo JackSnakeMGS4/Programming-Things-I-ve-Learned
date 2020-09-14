@@ -76,7 +76,6 @@ class Stack{
                 break;
             default:
                 this.first = current.next;
-                current.next = null;
                 break;
         }
         this.size--;
