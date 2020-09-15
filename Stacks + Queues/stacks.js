@@ -37,7 +37,8 @@ stack.shift();
 
     As far as Big O is concernced stacks/queues are always O(1) when inserting
     and removing. Searching and accessing specific elements is irrelevant and if it's
-    desired than a different data structure should be used.
+    desired than a different data structure should be used. The same applies for
+    queues.
 */
 class Node{
     constructor(value) {
