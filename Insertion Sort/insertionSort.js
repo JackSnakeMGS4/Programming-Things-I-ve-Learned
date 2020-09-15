@@ -1,4 +1,4 @@
-// Insertion is good for data that's partially sorted already
+// Insertion is good for data that's partially sorted already (same applies to bubble)
 // On the other hand, it's just as bad as bubble and selection sorts
 // for completely random data.
 
